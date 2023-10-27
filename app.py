@@ -43,3 +43,22 @@ def create_item_in_store(name):
             store['items'].append(new_item)
             return jsonify(new_item), 201
     return jsonify({'message': 'store not found'}), 404
+
+
+@app.route('/store/<string:name>', methods=['GET'])
+def get_store(name):
+    print(name)
+    for store in stores:
+        if store['name'] == name:
+            return jsonify(store)
+    return jsonify({'message': 'store not found'}), 404
+
+
+@app.route('/store/<string:name>/item', methods=['GET'])
+def get_items_in_store(name):
+    print(name)
+    for store in stores:
+        if store['name'] == name:
+            return jsonify({'items': store['items']})
+    return jsonify({'message': 'store not found'}), 404
+
