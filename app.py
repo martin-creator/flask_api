@@ -20,6 +20,7 @@ stores = [
 def get_stores():
     return jsonify({'stores': stores})
 
+
 @app.route('/store', methods=['POST'])
 def create_store():
     request_data = request.get_json()
@@ -29,6 +30,7 @@ def create_store():
     }
     stores.append(new_store)
     return jsonify(new_store), 201
+    
 
 @app.route('/store/<string:name>', methods=['POST'])
 def create_item_in_store(name):
@@ -62,3 +64,7 @@ def get_items_in_store(name):
             return jsonify({'items': store['items']})
     return jsonify({'message': 'store not found'}), 404
 
+
+
+if __name__ == '__main__':
+    app.run(port=5000, debug=True)
