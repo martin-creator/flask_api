@@ -1,3 +1,4 @@
+from urllib import request
 from flask import Flask, jsonify
 
 
@@ -18,3 +19,13 @@ stores = [
 @app.route('/store', methods=['GET'])
 def get_stores():
     return jsonify({'stores': stores})
+
+@app.route('/store', methods=['POST'])
+def create_store():
+    request_data = request.get_json()
+    new_store = {
+        'name': request_data['name'],
+        'items': []
+    }
+    stores.append(new_store)
+    return jsonify(new_store), 201
