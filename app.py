@@ -1,68 +1,58 @@
 from urllib import request
+import uu
+import uuid
 from flask import Flask, jsonify
-
+from db import stores, items
 
 app = Flask(__name__)
 
-stores = [
-    {
-        'name': 'My Wonderful Store',
-        'items': [
-            {
-                'name': 'My Item',
-                'price': 15.99
-            }
-        ]
-    }
-]
 
 @app.route('/store', methods=['GET'])
 def get_stores():
-    return jsonify({'stores': stores})
+    return jsonify({'stores': list(stores.values())})
 
 
 @app.route('/store', methods=['POST'])
 def create_store():
-    request_data = request.get_json()
-    new_store = {
-        'name': request_data['name'],
-        'items': []
+    store_data = request.get_json()
+    store_id = uuid.uuid4().hex
+    store = {**store_data, 'id': store_id
     }
-    stores.append(new_store)
-    return jsonify(new_store), 201
+    stores[store_id] = store
+    stores.append(store)
+    return jsonify(store), 201
     
 
-@app.route('/store/<string:name>', methods=['POST'])
+@app.route('/item', methods=['POST'])
 def create_item_in_store(name):
-    print(name)
-    request_data = request.get_json()
-    for store in stores:
-        if store['name'] == name:
-            new_item = {
-                'name': request_data['name'],
-                'price': request_data['price']
-            }
-            store['items'].append(new_item)
-            return jsonify(new_item), 201
-    return jsonify({'message': 'store not found'}), 404
+    item_data = request.get_json()
+    if item_data['store_id'] not in stores:
+        return jsonify({'message': 'store not found'}), 404
+    
+    item_id = uuid.uuid4().hex
+    item = {**item_data, 'id': item_id}
+    items[item_id] = item
+    return jsonify(item), 201
 
 
-@app.route('/store/<string:name>', methods=['GET'])
-def get_store(name):
-    print(name)
-    for store in stores:
-        if store['name'] == name:
-            return jsonify(store)
-    return jsonify({'message': 'store not found'}), 404
+@app.route('/items', methods=['GET'])
+def get_all_items():
+    return jsonify({'items': list(items.values())})
 
 
-@app.route('/store/<string:name>/item', methods=['GET'])
-def get_items_in_store(name):
-    print(name)
-    for store in stores:
-        if store['name'] == name:
-            return jsonify({'items': store['items']})
-    return jsonify({'message': 'store not found'}), 404
+@app.route('/store/<string:store_id>', methods=['GET'])
+def get_store(store_id):
+    try:
+        return jsonify(stores[int(store_id)])
+    except IndexError:
+        return jsonify({'message': 'store not found'}), 404
+
+@app.route('/item/<string:name>/item_id', methods=['GET'])
+def get_item(item_id):
+    try:
+        return jsonify(items[int(item_id)])
+    except IndexError:
+        return jsonify({'message': 'item not found'}), 404
 
 
 

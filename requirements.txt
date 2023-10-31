@@ -1,0 +1,6 @@
+flask
+flask-smorest
+flask-socketio
+flask-sqlalchemy
+flask-wtf
+python-dotenv
