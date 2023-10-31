@@ -1,6 +1,7 @@
 from urllib import request
 import uu
 import uuid
+from flask_smorest import abort
 from flask import Flask, jsonify
 from db import stores, items
 
@@ -27,7 +28,7 @@ def create_store():
 def create_item_in_store(name):
     item_data = request.get_json()
     if item_data['store_id'] not in stores:
-        return jsonify({'message': 'store not found'}), 404
+        abort(404, message='store not found')
     
     item_id = uuid.uuid4().hex
     item = {**item_data, 'id': item_id}
@@ -52,7 +53,7 @@ def get_item(item_id):
     try:
         return jsonify(items[int(item_id)])
     except IndexError:
-        return jsonify({'message': 'item not found'}), 404
+        abort(404, message='item not found')
 
 
 
