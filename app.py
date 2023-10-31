@@ -81,6 +81,28 @@ def get_item(item_id):
         abort(404, message='item not found')
 
 
+@app.route('/item/<string:name>', methods=['DELETE'])
+def delete_item(name):
+    try:
+        del items[int(name)]
+        return jsonify({'message': 'item deleted'})
+    except IndexError:
+        abort(404, message='item not found')
+
+
+@app.route('/item/<string:item_id>', methods=['PUT'])
+def update_item(item_id):
+    item_data = request.get_json()
+    if "price" not in item_data or "name" not in item_data:
+        abort(400, message='Bad request. Please provide price in json format')
+
+    try:
+        item = items[int(item_id)]
+        item |= item_data
+        return jsonify(item)
+    except IndexError:
+        abort(404, message='item not found')
+
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
