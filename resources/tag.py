@@ -1,100 +1,65 @@
-from flask.views import MethodView
-from flask_smorest import Blueprint, abort
+from flask_restful import Resource, reqparse
+from werkzeug.exceptions import BadRequest
 from sqlalchemy.exc import SQLAlchemyError
-
-from db import db
-from models import TagModel, StoreModel, ItemModel
-from schemas import TagSchema, TagAndItemSchema
-
-blp = Blueprint("Tags", "tags", description="Operations on tags")
+from models import TagModel
+from models import ItemModel
 
 
-@blp.route("/store/<string:store_id>/tag")
-class TagsInStore(MethodView):
-    @blp.response(200, TagSchema(many=True))
-    def get(self, store_id):
-        store = StoreModel.query.get_or_404(store_id)
-
-        return store.tags.all()  # lazy="dynamic" means 'tags' is a query
-
-    @blp.arguments(TagSchema)
-    @blp.response(201, TagSchema)
-    def post(self, tag_data, store_id):
-        if TagModel.query.filter(TagModel.store_id == store_id).first():
-            abort(400, message="A tag with that name already exists in that store.")
-
-        tag = TagModel(**tag_data, store_id=store_id)
-
-        try:
-            db.session.add(tag)
-            db.session.commit()
-        except SQLAlchemyError as e:
-            abort(
-                500,
-                message=str(e),
-            )
-
-        return tag
-
-
-@blp.route("/item/<string:item_id>/tag/<string:tag_id>")
-class LinkTagsToItem(MethodView):
-    @blp.response(201, TagSchema)
-    def post(self, item_id, tag_id):
-        item = ItemModel.query.get_or_404(item_id)
-        tag = TagModel.query.get_or_404(tag_id)
-
-        item.tags.append(tag)
-
-        try:
-            db.session.add(item)
-            db.session.commit()
-        except SQLAlchemyError:
-            abort(500, message="An error occurred while inserting the tag.")
-
-        return tag
-
-    @blp.response(200, TagAndItemSchema)
-    def delete(self, item_id, tag_id):
-        item = ItemModel.query.get_or_404(item_id)
-        tag = TagModel.query.get_or_404(tag_id)
-
-        item.tags.remove(tag)
-
-        try:
-            db.session.add(item)
-            db.session.commit()
-        except SQLAlchemyError:
-            abort(500, message="An error occurred while inserting the tag.")
-
-        return {"message": "Item removed from tag", "item": item, "tag": tag}
-
-
-@blp.route("/tag/<string:tag_id>")
-class Tag(MethodView):
-    @blp.response(200, TagSchema)
-    def get(self, tag_id):
-        tag = TagModel.query.get_or_404(tag_id)
-        return tag
-
-    @blp.response(
-        202,
-        description="Deletes a tag if no item is tagged with it.",
-        example={"message": "Tag deleted."},
+class Tag(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument(
+        "item_id",
+        type=int,
+        required=True,
+        help="To create or add a tag to an item, please provide the item_id.",
     )
-    @blp.alt_response(404, description="Tag not found.")
-    @blp.alt_response(
-        400,
-        description="Returned if the tag is assigned to one or more items. In this case, the tag is not deleted.",
-    )
-    def delete(self, tag_id):
-        tag = TagModel.query.get_or_404(tag_id)
 
-        if not tag.items:
-            db.session.delete(tag)
-            db.session.commit()
-            return {"message": "Tag deleted."}
-        abort(
-            400,
-            message="Could not delete tag. Make sure tag is not associated with any items, then try again.",  # noqa: E501
-        )
+    def get(self, name):
+        tag = TagModel.find_by_name(name)
+        if tag:
+            return tag.json()
+        return {"message": "Tag not found"}, 404
+
+    def post(self, name):
+        tag = TagModel.find_by_name(name)
+        if not tag:
+            tag = TagModel(name=name)
+
+        # Add the item to the tag
+        data = self.parser.parse_args()
+        item = ItemModel.query.get(data["item_id"])
+
+        if not item:
+            return {"message": "An item with this item_id doesn't exist."}, 400
+
+        tag.items.append(item)
+
+        try:
+            tag.save_to_db()
+        except SQLAlchemyError:
+            return {"message": "An error occurred while inserting the tag."}, 500
+
+        return tag.json(), 201
+
+    def delete(self, name):
+        tag = TagModel.find_by_name(name)
+        try:
+            data = self.parser.parse_args()
+            if "item_id" in data:
+                item = ItemModel.query.get(data["item_id"])
+                tag.items.remove(item)
+                return {
+                    "message": "Item removed from tag",
+                    "item": item.json(),
+                    "tag": tag.json(),
+                }
+        except BadRequest:
+            # Assume no item_id was passed. Instead delete entire tag.
+            # First check tag has no items
+            if not tag.items:
+                tag.delete_from_db()
+                return {"message": "Tag deleted."}
+            return {
+                "message": "Could not delete tag. Make sure tag is not associated with any items, then try again."
+            }
+        return {"message": "Tag not found."}, 404

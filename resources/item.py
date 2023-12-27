@@ -1,59 +1,78 @@
-from flask.views import MethodView
-from flask_smorest import Blueprint, abort
+from flask_restful import Resource, reqparse
+from flask_jwt_extended import get_jwt_identity, jwt_required, get_jwt
 from sqlalchemy.exc import SQLAlchemyError
-
-from db import db
 from models import ItemModel
-from schemas import ItemSchema, ItemUpdateSchema
-
-blp = Blueprint("Items", "items", description="Operations on items")
 
 
-@blp.route("/item/<string:item_id>")
-class Item(MethodView):
-    @blp.response(200, ItemSchema)
-    def get(self, item_id):
-        item = ItemModel.query.get_or_404(item_id)
-        return item
+class Item(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument(
+        "price", type=float, required=True, help="This field cannot be left blank!"
+    )
+    parser.add_argument(
+        "store_id", type=int, required=True, help="Every item needs a store_id."
+    )
 
-    def delete(self, item_id):
-        item = ItemModel.query.get_or_404(item_id)
-        db.session.delete(item)
-        db.session.commit()
-        return {"message": "Item deleted."}
-
-    @blp.arguments(ItemUpdateSchema)
-    @blp.response(200, ItemSchema)
-    def put(self, item_data, item_id):
-        item = ItemModel.query.get(item_id)
-
+    @jwt_required()
+    def get(self, name):
+        item = ItemModel.find_by_name(name)
         if item:
-            item.price = item_data["price"]
-            item.name = item_data["name"]
-        else:
-            item = ItemModel(id=item_id, **item_data)
+            return item.json()
+        return {"message": "Item not found"}, 404
 
-        db.session.add(item)
-        db.session.commit()
+    @jwt_required(fresh=True)
+    def post(self, name):
+        if ItemModel.find_by_name(name):
+            return {
+                "message": "An item with name '{}' already exists.".format(name)
+            }, 400
 
-        return item
+        data = self.parser.parse_args()
 
-
-@blp.route("/item")
-class ItemList(MethodView):
-    @blp.response(200, ItemSchema(many=True))
-    def get(self):
-        return ItemModel.query.all()
-
-    @blp.arguments(ItemSchema)
-    @blp.response(201, ItemSchema)
-    def post(self, item_data):
-        item = ItemModel(**item_data)
+        item = ItemModel(name=name, **data)
 
         try:
-            db.session.add(item)
-            db.session.commit()
+            item.save_to_db()
         except SQLAlchemyError:
-            abort(500, message="An error occurred while inserting the item.")
+            return {"message": "An error occurred while inserting the item."}, 500
 
-        return item
+        return item.json(), 201
+
+    @jwt_required()
+    def delete(self, name):
+        jwt = get_jwt()
+        if not jwt["is_admin"]:
+            return {"message": "Admin privilege required."}, 401
+
+        item = ItemModel.find_by_name(name)
+        if item:
+            item.delete_from_db()
+            return {"message": "Item deleted."}
+        return {"message": "Item not found."}, 404
+
+    def put(self, name):
+        data = self.parser.parse_args()
+
+        item = ItemModel.find_by_name(name)
+
+        if item:
+            item.price = data["price"]
+        else:
+            item = ItemModel(name, **data)
+
+        item.save_to_db()
+
+        return item.json()
+
+
+class ItemList(Resource):
+    @jwt_required(optional=True)
+    def get(self):
+        user_id = get_jwt_identity()
+        items = [item.json() for item in ItemModel.find_all()]
+        if user_id:
+            return {"items": items}, 200
+        return {
+            "items": [item["name"] for item in items],
+            "message": "More data available if you log in.",
+        }, 200
