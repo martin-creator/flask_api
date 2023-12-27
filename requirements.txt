@@ -8,3 +8,4 @@ sqlalchemy
 flask-jwt-extended
 passlib
 flask-restful
+flask-migrate
