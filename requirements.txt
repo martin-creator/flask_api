@@ -9,3 +9,10 @@ flask-jwt-extended
 passlib
 flask-restful
 flask-migrate
+marshmallow
+flask-migrate
+gunicorn
+redis
+rq
+psycopg2
+requests
