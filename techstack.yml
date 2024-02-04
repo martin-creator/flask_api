@@ -1,0 +1,232 @@
+repo_name: martin-creator/flask_api
+report_id: 05e3f0b992ba31c02d6fda02500d3a70
+version: 0.1
+repo_type: Public
+timestamp: '2024-02-04T08:00:59+00:00'
+requested_by: martin-creator
+provider: github
+branch: master
+detected_tools_count: 18
+tools:
+- name: Mako
+  description: Template library written in Python
+  website_url: https://github.com/zzzeek/mako
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Templating Languages & Extensions
+  image_url: https://img.stackshare.io/service/3583/default_43e3ee00dcc48a40f6fcba33551e4f5a99a10537.png
+  detection_source_url: https://github.com/martin-creator/flask_api
+  detection_source: Repo Metadata
+- name: Python
+  description: A clear and powerful object-oriented programming language, comparable
+    to Perl, Ruby, Scheme, or Java.
+  website_url: https://www.python.org
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/993/pUBY5pVj.png
+  detection_source_url: https://github.com/martin-creator/flask_api
+  detection_source: Repo Metadata
+- name: Redis
+  description: Open source (BSD licensed), in-memory data structure store
+  website_url: http://redis.io/
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: In-Memory Databases
+  image_url: https://img.stackshare.io/service/1031/default_cbce472cd134adc6688572f999e9122b9657d4ba.png
+  detection_source_url: https://github.com/martin-creator/flask_api/blob/master/requirements.txt
+  detection_source: requirements.txt
+  last_updated_by: martin-creator
+  last_updated_on: 2023-12-28 19:59:41.000000000 Z
+- name: SQLAlchemy
+  description: The Python SQL Toolkit and Object Relational Mapper
+  website_url: http://www.sqlalchemy.org/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Object Relational Mapper (ORM)
+  image_url: https://img.stackshare.io/service/1839/q5uAkmy7.png
+  detection_source_url: https://github.com/martin-creator/flask_api/blob/master/requirements.txt
+  detection_source: requirements.txt
+  last_updated_by: martin-creator
+  last_updated_on: 2023-12-27 16:50:04.000000000 Z
+- name: migra
+  description: A schema diff tool for PostgreSQL
+  website_url: https://migra.djrobstep.com/
+  license: Unlicense
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Database Tools
+  image_url: https://img.stackshare.io/no-img-open-source.png
+  detection_source_url: https://github.com/martin-creator/flask_api/blob/master/requirements.txt
+  detection_source: requirements.txt
+  last_updated_by: martin-creator
+  last_updated_on: 2023-12-28 19:59:41.000000000 Z
+- name: Docker
+  description: Enterprise Container Platform for High-Velocity Innovation.
+  website_url: https://www.docker.com/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Virtual Machine Platforms & Containers
+  image_url: https://img.stackshare.io/service/586/n4u37v9t_400x400.png
+  detection_source_url: https://github.com/martin-creator/flask_api
+  detection_source: Repo Metadata
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/martin-creator/flask_api
+  detection_source: Repo Metadata
+- name: GitHub Actions
+  description: Automate your workflow from idea to production
+  website_url: https://github.com/features/actions
+  open_source: false
+  hosted_saas: true
+  category: Build, Test, Deploy
+  sub_category: Continuous Integration
+  image_url: https://img.stackshare.io/service/11563/actions.png
+  detection_source_url: https://github.com/martin-creator/flask_api/blob/master/.github/workflows/python-app.yml
+  detection_source: ".github/workflows/python-app.yml"
+  last_updated_by: martin-creator
+  last_updated_on: 2023-12-28 19:59:41.000000000 Z
+- name: PyPI
+  description: A repository of software for the Python programming language
+  website_url: https://pypi.org/
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Hosted Package Repository
+  image_url: https://img.stackshare.io/service/12572/-RIWgodF_400x400.jpg
+  detection_source_url: https://github.com/martin-creator/flask_api/blob/master/requirements.txt
+  detection_source: requirements.txt
+  last_updated_by: martin-creator
+  last_updated_on: 2023-10-31 18:06:57.000000000 Z
+- name: pytest
+  description: A full-featured Python testing tool to help you write better programs
+  website_url: http://pytest.org/latest/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Testing Frameworks
+  image_url: https://img.stackshare.io/service/4586/Lu99Qe0Z_400x400.png
+  detection_source_url: https://github.com/martin-creator/flask_api/blob/master/requirements-dev.txt
+  detection_source: requirements-dev.txt
+  last_updated_by: martin-creator
+  last_updated_on: 2023-12-28 19:59:41.000000000 Z
+- name: Shell
+  description: A shell is a text-based terminal, used for manipulating programs and
+    files. Shell scripts typically manage program execution.
+  website_url: https://en.wikipedia.org/wiki/Shell_script
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png
+  detection_source_url: https://github.com/martin-creator/flask_api
+  detection_source: Repo Metadata
+- name: gunicorn
+  description: WSGI HTTP Server for UNIX
+  package_url: https://pypi.org/project/gunicorn
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/19931/default_74a0c20721d3a0a1484d69586401591fe8993db2.png
+  detection_source_url: https://github.com/martin-creator/flask_api/blob/master/requirements.txt
+  detection_source: requirements.txt
+  last_updated_by: martin-creator
+  last_updated_on: 2023-12-28 19:59:41.000000000 Z
+- name: marshmallow
+  description: A lightweight library for converting complex datatypes to and from
+    native Python datatypes
+  package_url: https://pypi.org/project/marshmallow
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/19893/default_f716e4bc541a9eb6e3f5b7a20d7c35355075b0b4.png
+  detection_source_url: https://github.com/martin-creator/flask_api/blob/master/requirements.txt
+  detection_source: requirements.txt
+  last_updated_by: martin-creator
+  last_updated_on: 2023-12-28 19:59:41.000000000 Z
+- name: passlib
+  description: Comprehensive password hashing framework supporting over 30 schemes
+  package_url: https://pypi.org/project/passlib
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/19992/default_aa5b3e77340c2bb80cd8e6a59cd82909abcdcd63.png
+  detection_source_url: https://github.com/martin-creator/flask_api/blob/master/requirements.txt
+  detection_source: requirements.txt
+  last_updated_by: martin-creator
+  last_updated_on: 2023-12-27 16:50:04.000000000 Z
+- name: psycopg2
+  description: Psycopg2 - Python-PostgreSQL Database Adapter
+  package_url: https://pypi.org/project/psycopg2
+  license: BSD-3-Clause-Attribution
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/20416/default_64aa60b33468d1d28611966765867676f6303b64.png
+  detection_source_url: https://github.com/martin-creator/flask_api/blob/master/requirements.txt
+  detection_source: requirements.txt
+  last_updated_by: martin-creator
+  last_updated_on: 2023-12-28 19:59:41.000000000 Z
+- name: python-dotenv
+  description: Add .env support to your django/flask apps in development and deployments
+  package_url: https://pypi.org/project/python-dotenv
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/20095/default_3141eabecdd8efa55de73a33c43f2ac0d5bbf954.png
+  detection_source_url: https://github.com/martin-creator/flask_api/blob/master/requirements.txt
+  detection_source: requirements.txt
+  last_updated_by: martin-creator
+  last_updated_on: 2023-10-31 18:06:57.000000000 Z
+- name: requests
+  description: Python HTTP for Humans
+  package_url: https://pypi.org/project/requests
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/19826/default_d7c684bf2673f008a9f02ac93901229297a22d7e.png
+  detection_source_url: https://github.com/martin-creator/flask_api/blob/master/requirements.txt
+  detection_source: requirements.txt
+  last_updated_by: martin-creator
+  last_updated_on: 2023-12-28 19:59:41.000000000 Z
+- name: rq
+  description: RQ is a simple
+  package_url: https://pypi.org/project/rq
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/20393/default_ec7f908dc4ac3533950df7d8e371292c0bdc3812.png
+  detection_source_url: https://github.com/martin-creator/flask_api/blob/master/requirements.txt
+  detection_source: requirements.txt
+  last_updated_by: martin-creator
+  last_updated_on: 2023-10-31 18:06:57.000000000 Z
