@@ -1,5 +1,7 @@
 # REST API using Flask-Smorest and Docker
 
+Documentation: [How to build the entire API from stratch](https://rest-apis-flask.teclado.com/)
+
 This is a REST API that mimics an online store, with users, stores, items, and item tags.
 
 How to code this REST API is covered in our [REST APIs with Flask and Python](https://github.com/tecladocode/rest-apis-flask-python) course.
