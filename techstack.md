@@ -3,15 +3,15 @@
 ## Tech Stack
 martin-creator/flask_api is built on the following main stack:
 
+- [Mako](https://github.com/zzzeek/mako) – Templating Languages & Extensions
 - [Python](https://www.python.org) – Languages
 - [Redis](http://redis.io/) – In-Memory Databases
 - [SQLAlchemy](http://www.sqlalchemy.org/) – Object Relational Mapper (ORM)
-- [Mako](https://github.com/zzzeek/mako) – Templating Languages & Extensions
+- [migra](https://migra.djrobstep.com/) – Database Tools
+- [Docker](https://www.docker.com/) – Virtual Machine Platforms & Containers
+- [GitHub Actions](https://github.com/features/actions) – Continuous Integration
 - [pytest](http://pytest.org/latest/) – Testing Frameworks
 - [Shell](https://en.wikipedia.org/wiki/Shell_script) – Shells
-- [migra](https://migra.djrobstep.com/) – Database Tools
-- [GitHub Actions](https://github.com/features/actions) – Continuous Integration
-- [Docker](https://www.docker.com/) – Virtual Machine Platforms & Containers
 
 Full tech stack [here](/techstack.md)
 
@@ -21,15 +21,15 @@ Full tech stack [here](/techstack.md)
 ## Tech Stack
 martin-creator/flask_api is built on the following main stack:
 
+- <img width='25' height='25' src='https://img.stackshare.io/service/3583/default_43e3ee00dcc48a40f6fcba33551e4f5a99a10537.png' alt='Mako'/> [Mako](https://github.com/zzzeek/mako) – Templating Languages & Extensions
 - <img width='25' height='25' src='https://img.stackshare.io/service/993/pUBY5pVj.png' alt='Python'/> [Python](https://www.python.org) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/1031/default_cbce472cd134adc6688572f999e9122b9657d4ba.png' alt='Redis'/> [Redis](http://redis.io/) – In-Memory Databases
 - <img width='25' height='25' src='https://img.stackshare.io/service/1839/q5uAkmy7.png' alt='SQLAlchemy'/> [SQLAlchemy](http://www.sqlalchemy.org/) – Object Relational Mapper (ORM)
-- <img width='25' height='25' src='https://img.stackshare.io/service/3583/default_43e3ee00dcc48a40f6fcba33551e4f5a99a10537.png' alt='Mako'/> [Mako](https://github.com/zzzeek/mako) – Templating Languages & Extensions
+- <img width='25' height='25' src='https://img.stackshare.io/no-img-open-source.png' alt='migra'/> [migra](https://migra.djrobstep.com/) – Database Tools
+- <img width='25' height='25' src='https://img.stackshare.io/service/586/n4u37v9t_400x400.png' alt='Docker'/> [Docker](https://www.docker.com/) – Virtual Machine Platforms & Containers
+- <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration
 - <img width='25' height='25' src='https://img.stackshare.io/service/4586/Lu99Qe0Z_400x400.png' alt='pytest'/> [pytest](http://pytest.org/latest/) – Testing Frameworks
 - <img width='25' height='25' src='https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png' alt='Shell'/> [Shell](https://en.wikipedia.org/wiki/Shell_script) – Shells
-- <img width='25' height='25' src='https://img.stackshare.io/no-img-open-source.png' alt='migra'/> [migra](https://migra.djrobstep.com/) – Database Tools
-- <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration
-- <img width='25' height='25' src='https://img.stackshare.io/service/586/n4u37v9t_400x400.png' alt='Docker'/> [Docker](https://www.docker.com/) – Virtual Machine Platforms & Containers
 
 Full tech stack [here](/techstack.md)
 
@@ -40,7 +40,7 @@ Full tech stack [here](/techstack.md)
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [martin-creator/flask_api](https://github.com/martin-creator/flask_api)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
-|18<br/>Tools used|02/04/24 <br/>Report generated|
+|18<br/>Tools used|02/29/24 <br/>Report generated|
 |------|------|
 </div>
 
